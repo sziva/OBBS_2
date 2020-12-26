@@ -2,15 +2,15 @@ function ffsig1 = doFilter(sig1, bot, top, Fs, ftype)
 
     sig1 = sig1'; % but to flip the signal using flipud we will need a row vector
 
-  %  Nr = length(sig1);
-  %  f = [0:(Fs/Nr):Fs];
+    Nr = length(sig1);
+    f = [0:(Fs/Nr):Fs];
     
     lw = [bot top]/(Fs/2);
     [b,a] = butter(4,lw,ftype); 
  
- %   figure;
-    % Note non-linear phase
- %   freqz(b,a);
+    figure;
+    %Note non-linear phase
+    freqz(b,a);
 
     % Forward filter
     fsig1 = filter(b,a,sig1);
@@ -21,24 +21,24 @@ function ffsig1 = doFilter(sig1, bot, top, Fs, ftype)
     % Re-flip the signal (return to forward)
     ffsig1 = flipud(ffsig1);
 
-%    figure;
- %   hold on; 
- %   plot(sig1,'b'); 
- %   plot(fsig1,'r');
- %   plot(ffsig1,'g');
-  %  legend('Unfiltered','Forward','Forward+Backward');
-  %  hold off;
+    figure;
+    hold on; 
+    plot(sig1,'b'); 
+    plot(fsig1,'r');
+    plot(ffsig1,'g');
+    legend('Unfiltered','Forward','Forward+Backward');
+    hold off;
 
     % See amplitude spectrum of unfiltered and filtered signal
-  %  S = fft(sig1);
-   % F = fft(ffsig1);
+    S = fft(sig1);
+    F = fft(ffsig1);
 
-    %idx = 1:1000;
+    idx = 1:1000;
 
-    %figure;
- %   subplot(2,1,1);
-  %  plot(f(idx),abs(S(idx)));
+    figure;
+    subplot(2,1,1);
+    plot(f(idx),abs(S(idx)));
 
-   % subplot(2,1,2);
-    %plot(f(idx),abs(F(idx)));
+    subplot(2,1,2);
+    plot(f(idx),abs(F(idx)));
 end

@@ -17,7 +17,7 @@ plot(signalPE);
 signalPE= doFilter(signalPE, bot, top, Fs, ftype);
 signalPE = signalPE(181*Fs:end-181*Fs); %When using filtered channels, note that the first and last 180 seconds of the signals should be ignored since these intervals contain transient effects of the filters. 
 
-sePE = sampleEntropy(signalPE, m, r);
+sePE = sampleEntropy(signalPE, m, r)
 
 %PL
 load('tpehg745m.mat');
@@ -27,7 +27,7 @@ plot(signalPL);
 signalPL = doFilter(signalPL, bot, top, Fs, ftype);
 signalPL = signalPL(181*Fs:end-181*Fs);
 
-sePL = sampleEntropy(signalPL, m, r);
+sePL = sampleEntropy(signalPL, m, r)
 
 %TE
 load('tpehg604m.mat');
@@ -37,7 +37,7 @@ plot(signalTE);
 signalTE= doFilter(signalTE, bot, top, Fs, ftype);
 signalTE = signalTE(181*Fs:end-181*Fs);
 
-seTE = sampleEntropy(signalTE, m, r);
+seTE = sampleEntropy(signalTE, m, r)
 
 %TL
 load('tpehg1216m.mat');
@@ -46,7 +46,8 @@ figure(4);
 plot(signalTL);
 signalTL= doFilter(signalTL, bot, top, Fs, ftype);
 sigbalTL = signalTL(181*Fs:end-181*Fs);
-seTL = sampleEntropy(signalTL, m, r);
+
+seTL = sampleEntropy(signalTL, m, r)
 
 %signal 2
 load('tpehg1476m.mat');
@@ -56,4 +57,4 @@ plot(signalPE2);
 signalPE2= doFilter(signalPE2, bot, top, Fs, ftype);
 signalPE2 = signalPE2(181*Fs:end-181*Fs); 
 
-sePE2 = sampleEntropy(signalPE2, m, r);
+sePE2 = sampleEntropy(signalPE2, m, r)

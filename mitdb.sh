@@ -18,7 +18,6 @@ do
 	wget -c --progress=dot $SERVER$r".dat" 2>&1 | grep --line-buffered "%" | sed -u -e "s,\.,,g" | awk '{printf("\b\b\b\b%4s", $2)}'
 #	Use these lines for quiet dowload
 #	wget -q --progress=bar:force -c $SERVER$r".hea"
-#	wget -q --progress=bar:force -c $SERVER$r".atr"
 #	wget -q --progress=bar:force -c $SERVER$r".dat"
 
 	echo "Converting recording to Matlab format ..."
