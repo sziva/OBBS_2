@@ -23,7 +23,7 @@ sePE = sampleEntropy(signalPE, m, r);
 load('tpehg745m.mat');
 signalPL = val(9,:);
 figure(2);
-plot(signalPL);
+plot(si
 signalPL = doFilter(signalPL, bot, top, Fs, ftype);
 signalPL = signalPL(181*Fs:end-181*Fs);
 
@@ -32,8 +32,6 @@ sePL = sampleEntropy(signalPL, m, r);
 %TE
 load('tpehg604m.mat');
 signalTE = val(9,:);
-figure(3);
-plot(signalTE);
 signalTE= doFilter(signalTE, bot, top, Fs, ftype);
 signalTE = signalTE(181*Fs:end-181*Fs);
 
@@ -42,17 +40,13 @@ seTE = sampleEntropy(signalTE, m, r);
 %TL
 load('tpehg1216m.mat');
 signalTL = val(9,:);
-figure(4);
-plot(signalTL);
 signalTL= doFilter(signalTL, bot, top, Fs, ftype);
 sigbalTL = signalTL(181*Fs:end-181*Fs);
 seTL = sampleEntropy(signalTL, m, r);
 
 %signal 2
-load('tpehg1476m.mat');
+load();
 signalPE2 = val(5,:);
-figure(5);
-plot(signalPE2);
 signalPE2= doFilter(signalPE2, bot, top, Fs, ftype);
 signalPE2 = signalPE2(181*Fs:end-181*Fs); 
 
