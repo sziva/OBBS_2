@@ -8,123 +8,185 @@ top = 4;
 m = 3;
 r = 0.15;
 
+%avgEntropy
+sepPE_AVG = 0;
+stPE = 0;
+sepPL_AVG = 0;
+stPL = 0;
+sepTE_AVG = 0;
+stTE = 0;
+sepTL_AVG = 0;
+stTL = 0;
+sepPE2_AVG = 0;
+stPE2 = 0;
+
 %signals 3
 %PE
-load('./data/tpehg1476m.mat');
-signalPE = val(9,:);
+file = dir('./PE/*.mat');
+for f = file'
+    record = f.name;
+    fileName = sprintf('./PE/%s', record);
+    load (fileName);
+    %load('./data/tpehg1476m.mat');
+    signalPE = val(9,:);
 
-%{
-figure(1);
-tiledlayout(2,1);
-nexttile
-plot(signalPE);
-title('original')
-%}
+    %{
+    figure(1);
+    tiledlayout(2,1);
+    nexttile
+    plot(signalPE);
+    title('original')
+    %}
 
-signalPE= doFilter(signalPE, bot, top, Fs, ftype);
-signalPE = signalPE(181*Fs:end-181*Fs); %When using filtered channels, note that the first and last 180 seconds of the signals should be ignored since these intervals contain transient effects of the filters. 
+    signalPE= doFilter(signalPE, bot, top, Fs, ftype);
+    signalPE = signalPE(181*Fs:end-181*Fs); %When using filtered channels, note that the first and last 180 seconds of the signals should be ignored since these intervals contain transient effects of the filters. 
 
-%{
-nexttile
-plot(signalPE);
-title('filtered')
-%}
+    %{
+    nexttile
+    plot(signalPE);
+    title('filtered')
+    %}
 
-sePE = sampleEntropy(signalPE, m, r)
-sepPE = sampen(signalPE,m+1,r,1,0,0)
+    sePE = sampleEntropy(signalPE, m, r);
+    sepPE = sampen(signalPE,m+1,r,1,0,0);
+    sepPE_AVG = sepPE_AVG + sepPE(4);
+    stPE = stPE + 1;
+    
+end
+sepPE_AVG = sepPE_AVG/stPE
 
 %PL
-load('./data/tpehg745m.mat');
-signalPL = val(9,:);
+file = dir('./PL/*.mat');
+for f = file'
+    record = f.name;
+    fileName = sprintf('./PL/%s', record);
+    load (fileName);
+    %load('./data/tpehg745m.mat');
+    signalPL = val(9,:);
 
-%{
-figure(2);
-tiledlayout(2,1);
-nexttile
-plot(signalPL);
-title('original')
-%}
+    %{
+    figure(2);
+    tiledlayout(2,1);
+    nexttile
+    plot(signalPL);
+    title('original')
+    %}
 
-signalPL = doFilter(signalPL, bot, top, Fs, ftype);
-signalPL = signalPL(181*Fs:end-181*Fs);
+    signalPL = doFilter(signalPL, bot, top, Fs, ftype);
+    signalPL = signalPL(181*Fs:end-181*Fs);
 
-%{
-nexttile
-plot(signalPL);
-title('filtered')
-%}
+    %{
+    nexttile
+    plot(signalPL);
+    title('filtered')
+    %}
 
-sePL = sampleEntropy(signalPL, m, r)
-sepPL = sampen(signalPL,m+1,r,1,0,0)
+    sePL = sampleEntropy(signalPL, m, r);
+    sepPL = sampen(signalPL,m+1,r,1,0,0);
+    sepPL_AVG = sepPL_AVG + sepPL(4);
+    stPL = stPL + 1;
+    
+end
+sepPL_AVG = sepPL_AVG/stPL
 
 %TE
-load('./data/tpehg604m.mat');
-signalTE = val(9,:);
+file = dir('./TE/*.mat');
+for f = file'
+    record = f.name;
+    fileName = sprintf('./TE/%s', record);
+    load (fileName);
+    %load('./data/tpehg604m.mat');
+    signalTE = val(9,:);
 
-%{
-figure(3);
-tiledlayout(2,1);
-nexttile
-plot(signalTE);
-title('original')
-%}
+    %{
+    figure(3);
+    tiledlayout(2,1);
+    nexttile
+    plot(signalTE);
+    title('original')
+    %}
 
-signalTE= doFilter(signalTE, bot, top, Fs, ftype);
-signalTE = signalTE(181*Fs:end-181*Fs);
+    signalTE= doFilter(signalTE, bot, top, Fs, ftype);
+    signalTE = signalTE(181*Fs:end-181*Fs);
 
-%{
-nexttile
-plot(signalTE);
-title('filtered')
-%}
+    %{
+    nexttile
+    plot(signalTE);
+    title('filtered')
+    %}
 
-seTE = sampleEntropy(signalTE, m, r)
-sepTE = sampen(signalTE,m+1,r,1,0,0)
+    seTE = sampleEntropy(signalTE, m, r);
+    sepTE = sampen(signalTE,m+1,r,1,0,0);
+    sepTE_AVG = sepTE_AVG + sepTE(4);
+    stTE = stTE + 1;
+    
+end
+sepTE_AVG = sepTE_AVG/stTE
 
 %TL
-load('./data/tpehg1216m.mat');
-signalTL = val(9,:);
+file = dir('./TL/*.mat');
+for f = file'
+    record = f.name;
+    fileName = sprintf('./TL/%s', record);
+    load (fileName);
+    %load('./data/tpehg1216m.mat');
+    signalTL = val(9,:);
 
-%{
-figure(4);
-tiledlayout(2,1);
-nexttile
-plot(signalTL);
-title('original')
-%}
+    %{
+    figure(4);
+    tiledlayout(2,1);
+    nexttile
+    plot(signalTL);
+    title('original')
+    %}
 
-signalTL= doFilter(signalTL, bot, top, Fs, ftype);
-signalTL = signalTL(181*Fs:end-181*Fs);
+    signalTL= doFilter(signalTL, bot, top, Fs, ftype);
+    signalTL = signalTL(181*Fs:end-181*Fs);
 
-%{
-nexttile
-plot(signalTL);
-title('filtered')
-%}
+    %{
+    nexttile
+    plot(signalTL);
+    title('filtered')
+    %}
 
-seTL = sampleEntropy(signalTL, m, r)
-sepTL = sampen(signalTL,m+1,r,1,0,0)
+    seTL = sampleEntropy(signalTL, m, r);
+    sepTL = sampen(signalTL,m+1,r,1,0,0);
+    sepTL_AVG = sepTL_AVG + sepTL(4);
+    stTL = stTL + 1;
+    
+end
+sepTL_AVG = sepTL_AVG/stTL
 
-%signal 2
-load('./data/tpehg1476m.mat');
-signalPE2 = val(5,:);
+%signal PE2
+file = dir('./PE/*.mat');
+for f = file'
+    record = f.name;
+    fileName = sprintf('./PE/%s', record);
+    load (fileName);
+    %load('./data/tpehg1476m.mat');
+    signalPE2 = val(5,:);
 
-%{
-figure(5);
-tiledlayout(2,1);
-nexttile
-plot(signalPE2);
-title('original')
-%}
+    %{
+    figure(5);
+    tiledlayout(2,1);
+    nexttile
+    plot(signalPE2);
+    title('original')
+    %}
 
-signalPE2= doFilter(signalPE2, bot, top, Fs, ftype);
-signalPE2 = signalPE2(181*Fs:end-181*Fs); 
+    signalPE2= doFilter(signalPE2, bot, top, Fs, ftype);
+    signalPE2 = signalPE2(181*Fs:end-181*Fs); 
 
-%{
-nexttile
-plot(signalPE2);
-title('filtered')
-%}
+    %{
+    nexttile
+    plot(signalPE2);
+    title('filtered')
+    %}
 
-sePE2 = sampleEntropy(signalPE2, m, r)
-sepPE2 = sampen(signalPE2,m+1,r,1,0,0)
+    sePE2 = sampleEntropy(signalPE2, m, r);
+    sepPE2 = sampen(signalPE2,m+1,r,1,0,0);
+    sepPE2_AVG = sepPE2_AVG + sepPE2(4);
+    stPE2 = stPE2 + 1;
+    
+end
+sepPE2_AVG = sepPE2_AVG/stPE2
